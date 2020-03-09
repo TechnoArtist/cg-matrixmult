@@ -5,7 +5,7 @@ function Mat4x4Identity(mat4x4) {
         [0, 1, 0, 0], 
         [0, 0, 1, 0], 
         [0, 0, 0, 1]
-    ]
+    ]; 
     return mat4x4; 
 }
 
@@ -17,7 +17,7 @@ function Mat4x4Translate(mat4x4, tx, ty, tz) {
         [0, 1, 0, ty], 
         [0, 0, 1, tz], 
         [0, 0, 0, 1]
-    ]
+    ]; 
     return mat4x4; 
 }
 
@@ -29,7 +29,7 @@ function Mat4x4Scale(mat4x4, sx, sy, sz) {
         [0, sy, 0, 0], 
         [0, 0, sz, 0], 
         [0, 0, 0, 1]
-    ]
+    ]; 
     return mat4x4.values; 
 }
 
@@ -41,7 +41,7 @@ function Mat4x4RotateX(mat4x4, theta) {
         [0, Math.cos(theta), -Math.sin(theta), 0], 
         [0, Math.sin(theta), Math.cos(theta), 0], 
         [0, 0, 0, 1]
-    ]
+    ]; 
     return mat4x4.values; 
 }
 
@@ -53,7 +53,7 @@ function Mat4x4RotateY(mat4x4, theta) {
         [0, 1, 0, 0], 
         [-Math.sin(theta), 0, Math.cos(theta), 0], 
         [0, 0, 0, 1]
-    ]
+    ]; 
     return mat4x4.values; 
 }
 
@@ -65,7 +65,7 @@ function Mat4x4RotateZ(mat4x4, theta) {
         [Math.sin(theta), Math.cos(theta), 0, 0], 
         [0, 0, 1, 0], 
         [0, 0, 0, 1]
-    ]
+    ]; 
     return mat4x4.values; 
 }
 
@@ -77,7 +77,7 @@ function Mat4x4ShearXY(mat4x4, shx, shy) {
         [0, 1, shy, 0]
         [0, 0, 1, 0]
         [0, 0, 0, 1]
-    ]
+    ]; 
     return mat4x4.values; 
 }
 
@@ -87,6 +87,6 @@ function Vector3(vec3, x, y, z) {
 }
 
 // set the x,y,z,w values of a 4-component vector
-function Vector4(vec3, x, y, z, w) {
-    vec3.values = [x, y, z, w];
+function Vector4(vec4, x, y, z, w) {
+    vec4.values = [x, y, z, w];
 }
