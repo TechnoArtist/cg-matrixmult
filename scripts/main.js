@@ -10,16 +10,22 @@ function CalculateCompoundTransform(transforms) {
     // `compound_transform = Matrix.multiply(...)`
     var tranform_matrices = [];
     
-    compound_transform = new Matrix(4, 4); // change / remove this
+    compound_transform = transforms[0]; 
+    for(var i = 1; i < transforms.length; i++) {
+        compound_transform = Matrix.multiply(compound_transform, transforms[i]); 
+    }
+    //compound_transform = new Matrix(4, 4); // change / remove this
 
     return compound_transform;
 }
 
 // automatically called whenever compound transform changes
 function CalculateTransformedVertex(vertex) {
-    // multiple vertex by compound_transform
+    // multiply vertex by compound_transform
     // `final_vertex = Matrix.multiply(...)`
-    var final_vertex = new Vector(4); // change / remove this
+    
+    var final_vertex = Matrix.multiply(vertex, compound_transform); 
+    //var final_vertex = new Vector(4); // change / remove this
 
     return final_vertex;
 }
