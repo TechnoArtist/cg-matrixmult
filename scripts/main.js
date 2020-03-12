@@ -26,6 +26,7 @@ function CalculateCompoundTransform(transforms) {
 function CalculateTransformedVertex(vertex) {
     // multiply vertex by compound_transform
     // `final_vertex = Matrix.multiply(...)`
+    
     //var final_vertex = new Vector(4); // change / remove this
     final_vertex = Matrix.multiply([compound_transform, vertex]); 
 
@@ -36,16 +37,13 @@ function CalculateTransformedVertex(vertex) {
 function ChangeTransform(index, type, values) {
     app.transforms[index].type = type;
     
-    console.log(type); 
-    console.log(values); 
-    
+    // update `app.transforms[index].mat4x4`
     if(type.valueOf() === "translate") app.transforms[index].mat4x4 = Mat4x4Translate(new Matrix(4, 4), values[0], values[1], values[2]); 
     else if(type.valueOf() === "scale") app.transforms[index].mat4x4 = Mat4x4Scale(new Matrix(4, 4), values[0], values[1], values[2]); 
     else if(type.valueOf() === "rotate_x") app.transforms[index].mat4x4 = Mat4x4RotateX(new Matrix(4, 4), values[0]); 
     else if(type.valueOf() === "rotate_y") app.transforms[index].mat4x4 = Mat4x4RotateY(new Matrix(4, 4), values[0]); 
     else if(type.valueOf() === "rotate_z") app.transforms[index].mat4x4 = Mat4x4RotateZ(new Matrix(4, 4), values[0]); 
     else app.transforms[index].mat4x4 = Mat4x4Identity(new Matrix(4, 4))
-    // update `app.transforms[index].mat4x4`
 
     // recalculate compound transform and tranformed vertex
     app.compound = CalculateCompoundTransform(app.transforms);
