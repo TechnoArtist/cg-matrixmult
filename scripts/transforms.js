@@ -60,7 +60,7 @@ function Mat4x4RotateY(mat4x4, theta) {
 // set values of mat4x4 to the rotate about z-axis matrix
 function Mat4x4RotateZ(mat4x4, theta) {
     //mat4x4.values = ...
-    mat4x4.values = [
+    mat4x4.values = [ //TODO translate degrees to radians
         [Math.cos(theta), -Math.sin(theta), 0, 0], 
         [Math.sin(theta), Math.cos(theta), 0, 0], 
         [0, 0, 1, 0], 
