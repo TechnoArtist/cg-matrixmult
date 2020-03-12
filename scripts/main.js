@@ -5,12 +5,19 @@ function CalculateCompoundTransform(transforms) {
     // matrices in `transforms[i].mat4x4`
     // note `transform[0]` is first tranform to apply to vertex
     
-    // if only one transform, set compound transform eequal to it
+    // if only one transform, set compound transform equal to it
     // otherwise multiply all matrices together (in proper order)
     // `compound_transform = Matrix.multiply(...)`
-    var tranform_matrices = [];
+    var transform_matrices = [];
+    
+    for(let i = 0; i < transforms.length; i++) {
+        transform_matrices.push(transforms[i].mat4x4); 
+    }
 
     compound_transform = new Matrix(4, 4); // change / remove this
+    
+    if(transforms.length > 1) compound_transform = Matrix.multiply(transform_matrices); 
+    else return transform_matrices[0]; 
 
     return compound_transform;
 }
@@ -19,7 +26,8 @@ function CalculateCompoundTransform(transforms) {
 function CalculateTransformedVertex(vertex) {
     // multiple vertex by compound_transform
     // `final_vertex = Matrix.multiply(...)`
-    var final_vertex = new Vector(4); // change / remove this
+    //var final_vertex = new Vector(4); // change / remove this
+    final_vertex = Matrix.multiply([compound_transform, vertex]); 
 
     return final_vertex;
 }
@@ -27,6 +35,16 @@ function CalculateTransformedVertex(vertex) {
 // automatically called whenever user modifies a transform (changes type or values)
 function ChangeTransform(index, type, values) {
     app.transforms[index].type = type;
+    
+    console.log(type); 
+    console.log(values); 
+    
+    if(type.valueOf() === "translate") app.transforms[index].mat4x4 = Mat4x4Translate(new Matrix(4, 4), values[0], values[1], values[2]); 
+    else if(type.valueOf() === "scale") app.transforms[index].mat4x4 = Mat4x4Scale(new Matrix(4, 4), values[0], values[1], values[2]); 
+    else if(type.valueOf() === "rotate_x") app.transforms[index].mat4x4 = Mat4x4RotateX(new Matrix(4, 4), values[0]); 
+    else if(type.valueOf() === "rotate_y") app.transforms[index].mat4x4 = Mat4x4RotateY(new Matrix(4, 4), values[0]); 
+    else if(type.valueOf() === "rotate_z") app.transforms[index].mat4x4 = Mat4x4RotateZ(new Matrix(4, 4), values[0]); 
+    else app.transforms[index].mat4x4 = Mat4x4Identity(new Matrix(4, 4))
     // update `app.transforms[index].mat4x4`
 
     // recalculate compound transform and tranformed vertex
